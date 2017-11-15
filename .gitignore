@@ -14,3 +14,5 @@
 # Serverless directories
 .serverless
 
+.idea
+serverless-ec2-tagging.iml
