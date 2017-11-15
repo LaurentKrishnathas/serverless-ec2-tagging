@@ -1,3 +1,7 @@
+# @author Laurent Krishnathas
+# @version 2017
+
+
 # serverless-ec2-tagging
 
 serverless:

@@ -5,6 +5,10 @@ import com.amazonaws.services.lambda.runtime.RequestHandler
 import groovy.transform.CompileStatic
 import org.apache.log4j.Logger
 
+/**
+ * @author Laurent Krishnathas
+ * @version 2017
+ */
 @CompileStatic
 class Handler implements RequestHandler<Map<String, Object>, ApiGatewayResponse> {
 
