@@ -1,9 +1,23 @@
-import json
+try:
+    import unzip_requirements
+except ImportError:
+    pass
 
+
+import json
+import boto3
 
 def hello(event, context):
+    s3 = boto3.resource('s3')
+    s = ""
+
+    for bucket in s3.buckets.all():
+        print(bucket.name)
+        s+=bucket.name
+        s+=","
+
     body = {
-        "message": "Go Serverless v1.0! Your function executed successfully!",
+        "message": "Go Serverless v1.0! Your function executed successfully! s3 list :"+s,
         "input": event
     }
 
@@ -22,3 +36,11 @@ def hello(event, context):
         "event": event
     }
     """
+
+
+
+
+
+
+
+
