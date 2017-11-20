@@ -14,7 +14,7 @@
 #
 # Happy Coding!
 
-service: ec2TaggingService
+service: ec2TagGrvyService
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
@@ -50,7 +50,7 @@ provider:
 
 # you can add packaging information here
 package:
-  artifact: build/distributions/hello.zip
+  artifact: build/distributions/ec2TagGrvyService.zip
 
 functions:
   hello:

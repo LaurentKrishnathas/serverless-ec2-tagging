@@ -21,7 +21,7 @@ dependencies {
 }
 
 task buildZip(type: Zip) {
-    baseName = "hello"
+    baseName = "$project.name"
     from compileGroovy
     from processResources
     into('lib') {
