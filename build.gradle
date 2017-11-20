@@ -20,16 +20,7 @@ dependencies {
     )
 }
 
-// Task for building the zip file for upload
 task buildZip(type: Zip) {
-    // Using the Zip API from gradle to build a zip file of all the dependencies
-    //
-    // The path to this zip file can be set in the serverless.yml file for the
-    // package/artifact setting for deployment to the S3 bucket
-    //
-    // Link: https://docs.gradle.org/current/dsl/org.gradle.api.tasks.bundling.Zip.html
-
-    // set the base name of the zip file
     baseName = "hello"
     from compileGroovy
     from processResources
@@ -39,7 +30,3 @@ task buildZip(type: Zip) {
 }
 
 build.dependsOn buildZip
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '3.5'
-}

@@ -1,0 +1,59 @@
+# @author Laurent Krishnathas
+# @version 2017
+
+name: test
+
+windows:
+
+#  - ansible:
+#        -
+
+  - build:
+      # root: ./
+      # layout: main-vertical
+      # layout: main-horizontal
+      layout: main-horizontal
+      panes:
+        - pwd
+        -
+        -
+
+#  - docker:
+#        -
+
+#  - docker-compose:
+#        -
+
+#  - editor:
+#        - idea build.gradle; echo "!"
+#        - atom .; echo "!"
+#        - sourcetree .; echo "!"
+
+  - gradle:
+        - gradlew clean build; echo "!"
+
+
+#  - jenkins:
+#        - jenkins build...; echo "!"
+
+#  - logs:
+#      panes:
+#        - heavy_things_tod; echo "!"
+
+#  - make:
+#        -
+
+#  - packer:
+#        -
+
+#  - scm:
+#        - git status; echo "!"
+
+#  - serverless:
+#        - sls deploy; echo "!"
+
+#  - terraform:
+#        - tf plan; echo "!"
+
+#  - vagrant:
+#        -
