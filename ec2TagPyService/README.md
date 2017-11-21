@@ -14,4 +14,4 @@ serverless:
     sls invoke -f hello
 
 
-
+plugin used to package python external dependancy

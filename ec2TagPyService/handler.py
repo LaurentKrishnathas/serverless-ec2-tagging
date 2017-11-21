@@ -1,3 +1,4 @@
+# this block needed bby
 try:
     import unzip_requirements
 except ImportError:
@@ -11,8 +12,10 @@ def hello(event, context):
     s3 = boto3.resource('s3')
     s = ""
 
+
     for bucket in s3.buckets.all():
         print(bucket.name)
+
         s+=bucket.name
         s+=","
 
