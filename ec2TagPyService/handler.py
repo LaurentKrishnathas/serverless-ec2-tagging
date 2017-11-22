@@ -1,45 +1,45 @@
-# this block needed bby
-try:
-    import unzip_requirements
-except ImportError:
-    pass
-
-
 import json
 import boto3
 
-def hello(event, context):
-    ec2root = boto3.client('ec2')
+def update_all_regions():
+    print("connecting to default region ...")
+    ec2 = boto3.client('ec2')
 
-    ec2_regions = [region['RegionName'] for region in ec2root.describe_regions()['Regions']]
+    print("getting regions list ...")
+    ec2_regions = [region['RegionName'] for region in ec2.describe_regions()['Regions']]
     for region in ec2_regions:
-        print("connecting to "+region)
-        ec2 = boto3.client('ec2',  region_name=region)
+        update_region(region)
 
-        response = ec2.describe_instances()
-        for reservation in (response["Reservations"]):
-            for instance in reservation["Instances"]:
-                instanceId=instance["InstanceId"]
-                print(instanceId)
-                mytags = [
-                    {
-                        "Key" : "Region",
-                        "Value" : region
-                    },
-                    {
-                        "Key" : "State",
-                        "Value" : instance["State"]["Name"]
-                    },
-                    {
-                        "Key" : "Team",
-                        "Value" : "xteam2"
-                    }
-                ]
-                print("creating tags for "+instanceId)
-                ec2.create_tags(
-                    Resources=[instanceId],
-                    Tags=mytags
-                )
+def update_region(region):
+    print("connecting to "+region)
+    ec2 = boto3.client('ec2',  region_name=region)
+    response = ec2.describe_instances()
+    for reservation in (response["Reservations"]):
+        for instance in reservation["Instances"]:
+            instanceId=instance["InstanceId"]
+            print(instanceId)
+            mytags = [
+                {
+                    "Key" : "Region",
+                    "Value" : region
+                },
+                {
+                    "Key" : "State",
+                    "Value" : instance["State"]["Name"]
+                },
+                {
+                    "Key" : "Team",
+                    "Value" : "xteam2"
+                }
+            ]
+            print("creating tags for "+instanceId)
+            ec2.create_tags(
+                Resources=[instanceId],
+                Tags=mytags
+            )
+
+def hello(event, context):
+    update_all_regions()
 
     msg="test wtf"
 

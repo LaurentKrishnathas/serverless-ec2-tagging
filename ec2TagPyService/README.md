@@ -12,6 +12,11 @@ serverless:
     sls plugin install -n serverless-python-requirements
     sls deploy                                                  #automatically cteate a zip file
     sls invoke -f hello
-
-
-plugin used to package python external dependancy
+    
+    
+    
+Project dockerized, can control via Make
+    make serverless_invokeLocal
+    make serverless_invoke
+    make serverless_deploy
+    make serverless_remove

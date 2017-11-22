@@ -1,0 +1,11 @@
+# @author Laurent Krishnathas
+# @version 2017/10/19
+
+# ignore all by default
+*/**
+
+# execept
+!build/app  
+!Makefile  
+!makefile.sh  
+
