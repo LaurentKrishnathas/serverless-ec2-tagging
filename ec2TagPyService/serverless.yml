@@ -1,3 +1,6 @@
+# @author Laurent Krishnathas
+# @version 3017
+#
 # Welcome to Serverless!
 #
 # This file is the main config file for your service.
@@ -11,7 +14,7 @@
 #
 # Happy Coding!
 
-service: ec2TagPyService
+service: ec2tagpyservice
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
@@ -30,6 +33,13 @@ provider:
     - Effect: "Allow"
       Action:
         - "s3:ListAllMyBuckets"
+      Resource: "*"
+
+    - Effect: "Allow"
+      Action:
+        - "ec2:DescribeInstances"
+        - "ec2:CreateTags"
+        - "ec2:DescribeRegions"
       Resource: "*"
 
 #    - Effect: "Allow"
@@ -61,8 +71,10 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  hello:
-    handler: handler.hello
+  ec2tagging:
+    handler: handler.handle
+    memorySize: 512 # optional, in MB, default is 1024
+    timeout: 300 # optional, in seconds, default is 6
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
@@ -108,6 +120,3 @@ functions:
 #     NewOutput:
 #       Description: "Description for the output"
 #       Value: "Some output value"
-
-#plugins:
-#  - serverless-python-requirements

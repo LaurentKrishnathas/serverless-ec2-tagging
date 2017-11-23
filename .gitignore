@@ -20,3 +20,4 @@
 .idea
 serverless-ec2-tagging.iml
 */**/build
+*/**/*.pyc
