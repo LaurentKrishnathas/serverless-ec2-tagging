@@ -9,6 +9,7 @@ Project dockerized to avoid local dependancy on tools like npm, serverless, pyth
     make serverless_invoke
     make serverless_deploy
     make serverless_remove
+    make serverless_logs
 
     
 serverless commands

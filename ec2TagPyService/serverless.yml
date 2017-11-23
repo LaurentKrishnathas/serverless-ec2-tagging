@@ -14,7 +14,7 @@
 #
 # Happy Coding!
 
-service: ec2tagpyservice
+service: ec2tagpythonservice
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
@@ -71,7 +71,7 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  ec2tagging:
+  ec2taggingfunction:
     handler: handler.handle
     memorySize: 512 # optional, in MB, default is 1024
     timeout: 300 # optional, in seconds, default is 6
