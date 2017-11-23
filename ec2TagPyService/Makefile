@@ -31,7 +31,7 @@ serverless_invokeLocal: docker_build
 serverless_invoke: docker_build
 	$(SERVERLESS) invoke -f $(SERVICE) --verbose
 
-serverless_invoke_debug: docker_build
+serverless_invoke_debug: docker_buildrr
 	$(SERVERLESS_DEBUG) invoke -f $(SERVICE) --verbose
 
 serverless_deploy: docker_build

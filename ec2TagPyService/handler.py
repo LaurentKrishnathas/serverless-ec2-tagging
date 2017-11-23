@@ -3,13 +3,13 @@
 
 import json
 import boto3
+import datetime
 
 def handle(event, context):
-    version="2017-11-23_09h50"
+    version="2017-11-23_14h46"
     print("main version "+version)
 
     msg=update_all_regions()
-
 
     body = {
         "message": "Go Serverless version "+str(version)+"! Your function executed successfully! "+str(msg),
@@ -49,17 +49,14 @@ def update_all_regions():
         except Exception as e: print(e)
     msg="updated "+str(count)+" in "+ str(len(ec2_regions))+" regions."
 
-
 def update_region(region):
     ec2 = boto3.client('ec2',  region_name=region)
     count=0
     print("connected to "+region)
+    date_str=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     response = ec2.describe_instances()
-    print("test 0")
     size=len(response["Reservations"])
-    print("test 1")
     print(str(size)+" instances found.")
-    print("test 2")
     for reservation in (response["Reservations"]):
         for instance in reservation["Instances"]:
             count=count+1
@@ -72,6 +69,10 @@ def update_region(region):
                 {
                     "Key" : "State",
                     "Value" : instance["State"]["Name"]
+                },
+                {
+                    "Key" : "Tags_Updated_By_Lambda",
+                    "Value" : date_str
                 }
             ]
             print("creating tags for "+instanceId)
