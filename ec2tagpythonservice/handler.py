@@ -5,12 +5,14 @@ import json
 import boto3
 import datetime
 
+# Loop over all regions, find ec2 intances and create and add tags to ec2
 def handle(event, context):
     version="2017-11-23_14h46"
     print("main version "+version)
 
     msg=update_all_regions()
 
+    # the body and response are kept for reference, used by Gateway API
     body = {
         "message": "Go Serverless version "+str(version)+"! Your function executed successfully! "+str(msg),
         "input": event
@@ -53,12 +55,12 @@ def update_region(region):
     ec2 = boto3.client('ec2',  region_name=region)
     count=0
     print("connected to "+region)
-    date_str=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     response = ec2.describe_instances()
     size=len(response["Reservations"])
     print(str(size)+" instances found.")
     for reservation in (response["Reservations"]):
         for instance in reservation["Instances"]:
+            date_str=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             count=count+1
             instanceId=instance["InstanceId"]
             mytags = [
@@ -71,7 +73,7 @@ def update_region(region):
                     "Value" : instance["State"]["Name"]
                 },
                 {
-                    "Key" : "Tags_Updated_By_Lambda",
+                    "Key" : "Updated_Tags",
                     "Value" : date_str
                 }
             ]

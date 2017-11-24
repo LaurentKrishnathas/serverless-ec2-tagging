@@ -5,10 +5,10 @@ set -e
 set -u
 set -x
 
-#
+# TODO can it work on windows ?
 #function hello_script(){
 #    echo "hello" $1
 #
 #}
 
-$*
+#$*
