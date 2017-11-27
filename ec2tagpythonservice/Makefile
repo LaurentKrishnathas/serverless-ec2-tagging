@@ -9,13 +9,17 @@ dockerfile=serverless.Dockerfile
 #FUNC=makefile.sh
 
 # Need to keep the following upto date with serverless.yml file
-SERVICE=ec2tagpythonservice
-FUNCTION=ec2taggingfunction
+SERVICE=serverless-ec2tagpythonservice
+FUNCTION=create_tags
 STAGE=dev
 
-DOCKER_RUN_CMD=docker run -it -v $(PWD):/code -v $(HOME)/.aws:/root/.aws $(image_name):$(image_version)
+DEBUG_ENV=
+ifeq ($(DEBUG),true)
+   DEBUG_ENV=-e SLS_DEBUG=*
+endif
+
+DOCKER_RUN_CMD=docker run -it -v $(PWD):/code -v $(HOME)/.aws_test-tf:/root/.aws $(DEBUG_ENV) $(image_name):$(image_version)
 SERVERLESS=$(DOCKER_RUN_CMD) serverless
-SERVERLESS_DEBUG=docker run -it -v $(PWD):/code -v $(HOME)/.aws:/root/.aws -e SLS_DEBUG=* $(image_name):$(image_version) serverless
 
 docker_build:
 	docker build -t $(image_name):$(image_version) --rm=false -f $(dockerfile) .
@@ -28,9 +32,6 @@ serverless_deploy: docker_build
 
 serverless_invoke: docker_build
 	$(SERVERLESS) invoke -f $(FUNCTION) --verbose
-
-serverless_invoke_debug: docker_buildrr
-	$(SERVERLESS_DEBUG) invoke -f $(FUNCTION) --verbose
 
 serverless_logs:
 	$(SERVERLESS) logs -f $(FUNCTION) --tail

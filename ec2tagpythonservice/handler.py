@@ -6,7 +6,7 @@ import boto3
 import datetime
 
 # Loop over all regions, find ec2 intances and create and add tags to ec2
-def handle(event, context):
+def create_tags(event, context):
     version="2017-11-23_14h46"
     print("main version "+version)
 
